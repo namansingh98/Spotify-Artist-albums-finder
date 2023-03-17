@@ -12,8 +12,7 @@ import {
   CardImg,
 } from "reactstrap";
 
-const CLIENT_ID = "ae068d5eb87c41f794ba2eeda98ef93f";
-const CLIENT_SECRET = "c82dc24bfa2d4dc182a435962d7b6f4c";
+
 function Searchapi() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
