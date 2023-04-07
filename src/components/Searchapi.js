@@ -98,10 +98,11 @@ function Searchapi() {
           <Button onClick={search} className="my-2">Search</Button>
         </FormGroup>
       </Container>
-      <Row className="row row-cols-4 mx-2 gap-2">
+      <Row className="row row-cols-5 mx-2 gap-2">
         {albums.map((album, i) => {
           
           return (
+            <Container>
             <Card key={i}>
               <CardImg src={album.images[0].url} />
               <CardBody>
@@ -110,6 +111,7 @@ function Searchapi() {
                 </CardBody>
               </CardBody>
             </Card>
+            </Container>
           );
         })}
       </Row>
