@@ -12,7 +12,8 @@ import {
   CardImg,
 } from "reactstrap";
 
-
+const CLIENT_ID = "ae068d5eb87c41f794ba2eeda98ef93f";
+const CLIENT_SECRET = "c82dc24bfa2d4dc182a435962d7b6f4c";
 function Searchapi() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
@@ -97,10 +98,11 @@ function Searchapi() {
           <Button onClick={search} className="my-2">Search</Button>
         </FormGroup>
       </Container>
-      <Row className="row row-cols-4 mx-2 gap-2">
+      <Row className="row row-cols-5 mx-2 gap-2">
         {albums.map((album, i) => {
           
           return (
+            <Container>
             <Card key={i}>
               <CardImg src={album.images[0].url} />
               <CardBody>
@@ -109,6 +111,7 @@ function Searchapi() {
                 </CardBody>
               </CardBody>
             </Card>
+            </Container>
           );
         })}
       </Row>
