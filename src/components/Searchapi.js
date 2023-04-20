@@ -1,4 +1,5 @@
 import React from "react";
+import "../App.css";
 import { useState, useEffect } from "react";
 import {
   Container,
@@ -12,18 +13,21 @@ import {
   CardImg,
 } from "reactstrap";
 
-
 function Searchapi() {
+  const CLIENT_ID = "ae068d5eb87c41f794ba2eeda98ef93f";
+  const CLIENT_SECRET = "c82dc24bfa2d4dc182a435962d7b6f4c";
+
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
-  const [albums, setAlbum] = useState([]);    // Taking data as a array from this.. 
- 
+  const [albums, setAlbum] = useState([]); // Taking data as a array from this..
+
   useEffect(() => {
     // API Access Token
     var authParameter = {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
-      body:                                           // POST method to check the token and authorization 
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      // POST method to check the token and authorization
+      body:
         "grant_type=client_credentials&client_id=" +
         CLIENT_ID +
         "&client_secret=" +
@@ -37,20 +41,20 @@ function Searchapi() {
   //--------------- search ---------
 
   async function search() {
-    console.log("Search for " + searchInput);   //jass manank
+    console.log("Search for " + searchInput); //jass manank
 
-    // get request using search to get the artist 
+    // get request using search to get the artist
 
     var searchParameters = {
       method: "GET",
       headers: {
-        "Content-Type": "application/json", 
-        Authorization: "Bearer " + accessToken,   // GET method for getting the value form POST
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + accessToken, // GET method for getting the value form POST
       },
     };
 
     var artistID = await fetch(
-      "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist",   // getting the value of result as the id of artist
+      "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist", // getting the value of result as the id of artist
       searchParameters
     )
       .then((res) => res.json())
@@ -66,7 +70,7 @@ function Searchapi() {
       "https://api.spotify.com/v1/artists/" +
         artistID +
         "/albums" +
-        "?include_groups=album&limit=50",    // market value for the specific country and limit is for the limit of the results.
+        "?include_groups=album&limit=50", // market value for the specific country and limit is for the limit of the results.
       searchParameters
     )
       .then((res) => res.json())
@@ -76,13 +80,12 @@ function Searchapi() {
     // display those album to the user
   }
 
-
   return (
     <>
       <Container>
         <h1 className="text-center align-content-center">Search Album Hear</h1>
-      <hr></hr>
-        <FormGroup >
+        <hr></hr>
+        <FormGroup>
           <Input
             placeholder="search for artist"
             type="input"
@@ -91,15 +94,15 @@ function Searchapi() {
                 search();
               }
             }}
-            onChange={(event) => setSearchInput(event.target.value) }
-            
+            onChange={(event) => setSearchInput(event.target.value)}
           />
-          <Button onClick={search} className="my-2">Search</Button>
+          <Button onClick={search} className="my-2">
+            Search
+          </Button>
         </FormGroup>
       </Container>
-      <Row className="row row-cols-4 mx-2 gap-2">
+      <Row className="row row-cols-3 mx-5 gap-4 align-content-center">
         {albums.map((album, i) => {
-          
           return (
             <Card key={i}>
               <CardImg src={album.images[0].url} />
