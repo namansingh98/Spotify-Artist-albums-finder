@@ -12,8 +12,7 @@ import {
   CardImg,
 } from "reactstrap";
 
-const CLIENT_ID = "ae068d5eb87c41f794ba2eeda98ef93f";
-const CLIENT_SECRET = "c82dc24bfa2d4dc182a435962d7b6f4c";
+
 function Searchapi() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
@@ -26,9 +25,9 @@ function Searchapi() {
       headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
       body:                                           // POST method to check the token and authorization 
         "grant_type=client_credentials&client_id=" +
-        CLIENT_ID +
+        process.env.CLIENT_ID +
         "&client_secret=" +
-        CLIENT_SECRET,
+        process.env.CLIENT_SECRET,
     };
     fetch("https://accounts.spotify.com/api/token", authParameter)
       .then((result) => result.json())
